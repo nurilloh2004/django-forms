@@ -8,6 +8,6 @@ class BookInLineAdmin(admin.TabularInline):
 
 class AuthorAdmin(admin.ModelAdmin):
     inlines = [BookInLineAdmin]
-
+    model = Author
 
 admin.site.register(Author, AuthorAdmin)
