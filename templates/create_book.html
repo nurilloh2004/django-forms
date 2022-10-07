@@ -1,13 +1,28 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a book</title>
+</head>
 
-<h1>Create books for {{ author.name }}</h1>
+<body>
+    <h1>Create books for {{ author.name }}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        {{ formset.as_p }}
+        <button>Submit</button>
+    </form>
+    
+    <hr>
 
-<button type="button" hx-get="{% url 'create-book-form' %}" hx-target="#bookforms" hx-swap="beforeend">
-    Add form
-</button>
+    <h2>Books</h2>
+    {% for book in books %}
+    <p>{{ book.title }} - {{ book.number_of_pages }}</p>
+    {% endfor %}
+</body>
 
-<div id="bookforms"></div>
-
-{% endblock %}
+</html>
